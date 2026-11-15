@@ -1,0 +1,31 @@
+
+name: Django Automated Tests
+
+on:
+  push:
+    branches:
+      - main
+      - testing
+      - development
+      - production
+
+  pull_request:
+    branches:
+      - main
+      - testing
+      - development
+      - production
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and run Django tests
+        run: docker compose run --build --rm web python manage.py test
