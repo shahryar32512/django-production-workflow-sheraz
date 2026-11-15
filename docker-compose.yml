@@ -1,0 +1,9 @@
+services:
+  web:
+    build: .
+    container_name: django_workflow
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/app
+    command: python manage.py runserver 0.0.0.0:8001
